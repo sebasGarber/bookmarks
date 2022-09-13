@@ -1,10 +1,8 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -14,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FormLogin from './FormLogin';
 import RtlMaterialCont from '../../utils/RtlMaterialCont';
+import FormNewUser from './FormNewUser';
 
 function Copyright(props) {
   return (
@@ -27,7 +26,11 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
 export default function loginPageIndex() {
+
+  const [newUserPage, setNewUserPage] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -38,7 +41,7 @@ export default function loginPageIndex() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -69,17 +72,17 @@ export default function loginPageIndex() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              {newUserPage ? <span>יצירת משתמש</span> : <span>התחברות</span>}
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               
             
-            <RtlMaterialCont content={ <FormLogin /> } /> 
+            {newUserPage ? <RtlMaterialCont content={ <FormNewUser /> } /> : <RtlMaterialCont content={ <FormLogin /> } /> }
 
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
+                  <Link className='buttonPages' href="#" variant="body2" onClick={() => setNewUserPage(!newUserPage)}>
+                    {newUserPage ? <span>חזרה להתחברות</span> : <span>משתמש חדש?</span> }
                   </Link>
                 </Grid>
               </Grid>

@@ -8,7 +8,15 @@ import { toast } from 'react-toastify' //npm i react-toastify
 import TextField from '@mui/material/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-export default function FormLogin() {
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendEmailVerification,
+  } from 'firebase/auth'
+
+  import { auth } from './../../utils/Firebase'
+
+export default function FormNewUser() {
 
   
    const formFields = [
@@ -23,6 +31,13 @@ export default function FormLogin() {
             name : "password",
             placeholder: "סיסמה",
             type: 'password',
+            defaultValue: '',
+            error: '*שדה חובה'
+        },
+        {
+            name : "username",
+            placeholder: "שם משתמש",
+            type: 'text',
             defaultValue: '',
             error: '*שדה חובה'
         }
@@ -47,7 +62,13 @@ export default function FormLogin() {
 
    useEffect(() => {
 
-        if(!validator.isEmail(formData.email) ) {
+        if(validator.isEmpty(formData.username)) {
+
+            setAreErrors('נא להזין שם משתמש');
+
+        }
+
+        else if(!validator.isEmail(formData.email) ) {
             setAreErrors('נא להזין מייל תקין');
         }
 
@@ -56,6 +77,7 @@ export default function FormLogin() {
             setAreErrors('נא להזין סיסמה');
 
         }
+
 
         else if(formData.password.length < 8 ) {
 
@@ -83,16 +105,79 @@ export default function FormLogin() {
         
         else {
 
-            setAreErrors(false);
-            console.log('yes');
-            //sendtoApi('index', 'login', formData, setLoading)
+            setLoading(true)
 
+            createUserWithEmailAndPassword(auth, formData.email, formData.password)
+
+                .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user
+
+                    console.log(user)
+                    console.log('Registro completado')
+                    changeUserName()
+                    sendVerificationEmail()
+
+                })
+
+                .catch((error) => {
+                    //const errorCode = error.code
+                    //const errorMessage = error.message
+                    toast.error('Error al crear la cuenta')
+                })
+
+                .finally(() => {
+                    setLoading(false)
+                    //setSelectedForm(null)
+                })
         }
 
     }
 
+    const changeUserName = () => {
+
+        updateProfile(auth.currentUser, {
+        displayName: formData.userName,
+        })
+        .then(() => {
+            // Profile updated!
+            // ...
+        })
+        .catch((error) => {
+            // An error occurred
+            // ...
+            toast.error('Error al asignar el nombre de Usuario')
+        })
+    }
+
+    const sendVerificationEmail = () => {
+        sendEmailVerification(auth.currentUser)
+        .then(() => {
+            // Email verification sent!
+
+            toast.success('Se ha enviado un email de verificaion')
+        })
+        .catch(() => {
+            toast.error('Error al enviar el emais de verificacion')
+        })
+    }
+
   return (
     <div className='formLogin animate__animated animate__fadeIn'>
+
+
+        <FormControl  className='form-100' >
+            <TextField 
+                name={formFields[2].name}
+                onChange={onChange}
+                //multiline
+                value={formData.assignText}
+                label={formFields[2].placeholder}
+                error={ !formData[formFields[2].name] && showErrors }
+                helperText={ !formData[formFields[2].name] && showErrors && formFields[2].error }
+                
+            />
+        </FormControl>
 
         <FormControl  className='form-100' >
             <TextField 
@@ -123,8 +208,8 @@ export default function FormLogin() {
 
         <div className="d-grid gap-2 btnCont">
 
-            <Button className={`customBtn_pink ${!areErrors ? 'animate__animated animate__bounceIn' : ''}`} disabled={loading} variant={ (areErrors && showErrors) ? 'danger' : 'primary'} size="lg" onClick={ onSubmit }>
-                {loading ? <Spinner size="" animation="border" variant="light" /> : <span>התחברות</span> }
+            <Button className={`customBtn_violet ${!areErrors ? 'animate__animated animate__bounceIn' : ''}`} disabled={loading} variant={ (areErrors && showErrors) ? 'danger' : 'primary'} size="lg" onClick={ onSubmit }>
+                {loading ? <Spinner size="" animation="border" variant="light" /> : <span>יצירת משתמש חדש</span> }
             </Button>
 
         </div>

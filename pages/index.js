@@ -1,5 +1,4 @@
 import Head from 'next/head'
-//import styles from '../styles/Home.module.css'
 import LoginPageIndex from '../components/layout/loginPage/loginPageIndex'
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/client'; //npm install --save-exact next-auth@3
@@ -33,14 +32,14 @@ export default function Home() {
 
 
   return (
-    <div className=''> {/* {styles.container} */}
+    <div className='loginPageIndex'>
       <Head>
         <title>Bookmarks</title>
         <meta name="description" content="Bookmarks System by Sebas" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main > {/* className={styles.main} */}
+      <main> {/* className={styles.main} */}
         <LoginPageIndex />
       </main>
 

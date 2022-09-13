@@ -29,15 +29,70 @@ body {
   width: 100%;
 }
 
-.formLogin {
+.customBtn {
 
-  .form-100 {
-    min-height: 70px;
-    
+  &_pink {
+    background-color: $pink;
+    border: $pink; 
+
+    &:hover,&:focus {
+      background: $violet;
+    }
+
+    &.btn-danger {
+      background: $redDanger;
+    }
+
   }
 
-  .btn {
+  &_violet {
+    background-color: $violet;
+    border: $violet; 
+
+    &:hover,&:focus {
+      background: black;
+    }
+
+    &.btn-danger {
+      background: $redDanger;
+    }
+
+  }
+
+  &.btn-danger {
+    background:$redDanger;
+  }
+
+}
+
+.loginPageIndex {
+
+  h1 {
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .formLogin {
+  
+      
+    .form-100 {
+      min-height: 70px;
+      
+    }
+  
+    .btn {
+      margin: 5px 0 0 0;
+    }
+  
+  }
+
+  .buttonPages {
+    font-size: 20px;
+    font-family: $fontMedium;
+    color: $violet;
+    display: block;
     margin: 5px 0 0 0;
+    text-decoration: none;
   }
 
 }

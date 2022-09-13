@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import '../styles/animateNew.css'
 import '../styles/globals.css'
 import '../styles/site.scss'
 
