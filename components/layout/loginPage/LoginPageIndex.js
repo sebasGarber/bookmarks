@@ -30,6 +30,7 @@ const theme = createTheme();
 export default function loginPageIndex() {
 
   const [newUserPage, setNewUserPage] = useState(false);
+  const [newUserData, setNewUserData] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,8 +59,9 @@ export default function loginPageIndex() {
             backgroundPosition: 'left bottom',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} alignContent='center' component={Paper} elevation={6} square>
           <Box
+            className="boxCont"
             sx={{
               my: 8,
               mx: 4,
@@ -74,10 +76,10 @@ export default function loginPageIndex() {
             <Typography component="h1" variant="h5">
               {newUserPage ? <span>יצירת משתמש</span> : <span>התחברות</span>}
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form"  noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               
             
-            {newUserPage ? <RtlMaterialCont content={ <FormNewUser /> } /> : <RtlMaterialCont content={ <FormLogin /> } /> }
+            {newUserPage ? <RtlMaterialCont content={ <FormNewUser setNewUserPage = {setNewUserPage} newUserData = {newUserData} setNewUserData={setNewUserData} /> } /> : <RtlMaterialCont content={ <FormLogin newUserData = {newUserData} /> } /> }
 
               <Grid container>
                 <Grid item xs>

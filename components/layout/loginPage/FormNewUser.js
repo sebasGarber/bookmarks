@@ -8,15 +8,9 @@ import { toast } from 'react-toastify' //npm i react-toastify
 import TextField from '@mui/material/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-import {
-    createUserWithEmailAndPassword,
-    updateProfile,
-    sendEmailVerification,
-  } from 'firebase/auth'
+export default function FormNewUser(props) {
 
-  import { auth } from './../../utils/Firebase'
-
-export default function FormNewUser() {
+    const { setNewUserPage, newUserData, setNewUserData } = props
 
   
    const formFields = [
@@ -49,6 +43,7 @@ export default function FormNewUser() {
    const [loading, setLoading] = useState(false)
    const [showErrors, setShowErrors] = useState(false)
    const [areErrors, setAreErrors] = useState(false);
+   
 
    const onChange = (e) => {
 
@@ -59,7 +54,7 @@ export default function FormNewUser() {
 
    }
 
-
+   //check for errors
    useEffect(() => {
 
         if(validator.isEmpty(formData.username)) {
@@ -91,8 +86,21 @@ export default function FormNewUser() {
 
    }, [formData])
    
+   //created user
+   useEffect(() => {
+    
+        if(newUserData) {
 
-   const onSubmit = () => { 
+            setNewUserPage(false);
+            //console.log('newUserData', newUserData);
+
+       }
+
+
+   }, [newUserData])
+   
+
+   async function onSubmit() { 
         
         setShowErrors(true);
         setAreErrors(true);
@@ -105,63 +113,13 @@ export default function FormNewUser() {
         
         else {
 
-            setLoading(true)
-
-            createUserWithEmailAndPassword(auth, formData.email, formData.password)
-
-                .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user
-
-                    console.log(user)
-                    console.log('Registro completado')
-                    changeUserName()
-                    sendVerificationEmail()
-
-                })
-
-                .catch((error) => {
-                    //const errorCode = error.code
-                    //const errorMessage = error.message
-                    toast.error('Error al crear la cuenta')
-                })
-
-                .finally(() => {
-                    setLoading(false)
-                    //setSelectedForm(null)
-                })
+            createUser(formData,setLoading,setNewUserData);
+            
         }
 
     }
 
-    const changeUserName = () => {
-
-        updateProfile(auth.currentUser, {
-        displayName: formData.userName,
-        })
-        .then(() => {
-            // Profile updated!
-            // ...
-        })
-        .catch((error) => {
-            // An error occurred
-            // ...
-            toast.error('Error al asignar el nombre de Usuario')
-        })
-    }
-
-    const sendVerificationEmail = () => {
-        sendEmailVerification(auth.currentUser)
-        .then(() => {
-            // Email verification sent!
-
-            toast.success('Se ha enviado un email de verificaion')
-        })
-        .catch(() => {
-            toast.error('Error al enviar el emais de verificacion')
-        })
-    }
-
+    
   return (
     <div className='formLogin animate__animated animate__fadeIn'>
 
@@ -232,4 +190,51 @@ function defaultValueForm(formFields) {
 
 }
 
+function createUser(formData,setLoading,setNewUserData) {
+    
+    setLoading(true);
+
+    try {
+
+        fetch(`/api/auth/signup`, {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type' : 'application/json',
+        }
+        }) 
+
+        .then((response) => response.json())
+
+        .then((data) => {
+
+            setLoading(false);
+
+            if(data?.error) {
+                toast.error(data.error);
+            }
+
+            else if(data?.ok && data?.user) {
+                toast.success(data.ok);
+                setNewUserData(data?.user);
+            }
+
+            else {
+                toast.error('שגיאה');
+            }
+
+
+        });
+
+    } catch (e) {
+
+        toast.error('שגיאה בשרת');
+        return {};
+        
+    }
+
+    
+
+  
+}
 

@@ -8,8 +8,16 @@ import { toast } from 'react-toastify' //npm i react-toastify
 import TextField from '@mui/material/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-export default function FormLogin() {
+import { signIn } from "next-auth/client"
+import { useRouter } from 'next/router'
 
+export default function FormLogin(props) {
+
+    const { newUserData } = props
+
+    const  router = useRouter();
+
+    //console.log('newUserData', newUserData);
   
    const formFields = [
        {
@@ -44,7 +52,7 @@ export default function FormLogin() {
 
    }
 
-
+   //Search 4 errors
    useEffect(() => {
 
         if(!validator.isEmail(formData.email) ) {
@@ -70,6 +78,17 @@ export default function FormLogin() {
    }, [formData])
    
 
+   //Populate Email after create
+   useEffect(() => {
+
+        if(newUserData?.email) {
+
+            setFormData({...formData, email: newUserData?.email });
+
+        }
+    
+   }, [newUserData])
+
    const onSubmit = () => { 
         
         setShowErrors(true);
@@ -84,22 +103,30 @@ export default function FormLogin() {
         else {
 
             setAreErrors(false);
-            console.log('yes');
-            //sendtoApi('index', 'login', formData, setLoading)
+            loginUser(formData,setLoading,router);
+            
 
         }
 
     }
 
+   
   return (
     <div className='formLogin animate__animated animate__fadeIn'>
+
+        {newUserData?.email && <div className='newUserData'>
+            <p>לא לשכוח לאשר את המייל ב-{newUserData.email}</p>
+            {/* <Button className={`customBtn`} variant='primary' size="sm" onClick={ sendNewMail }>
+                <span>לשליחה חוזרת</span>
+            </Button> */}
+        </div>}
 
         <FormControl  className='form-100' >
             <TextField 
                 name={formFields[0].name}
                 onChange={onChange}
                 //multiline
-                value={formData.assignText}
+                value={formData[formFields[0].name]}
                 label={formFields[0].placeholder}
                 error={ !formData[formFields[0].name] && showErrors }
                 helperText={ !formData[formFields[0].name] && showErrors && formFields[0].error }
@@ -112,7 +139,7 @@ export default function FormLogin() {
                 name={formFields[1].name}
                 onChange={onChange}
                 //multiline
-                value={formData.assignText}
+                value={formData[formFields[1].name]}
                 label={formFields[1].placeholder}
                 error={ !formData[formFields[1].name] && showErrors }
                 helperText={ !formData[formFields[1].name] && showErrors && formFields[1].error }
@@ -143,8 +170,33 @@ function defaultValueForm(formFields) {
         
       })
 
+    
     return objReturn;
 
 }
 
+async function loginUser(formData,setLoading,router) {
+    
+    
 
+    setLoading(true);
+
+    const result = await signIn('credentials', {
+
+        redirect: false, //cuando la clave no esta bien redireccionar
+        email: formData.email,
+        password:formData.password,
+
+    });
+
+    console.log('result',  result);
+
+    setLoading(false);
+
+    if(!result.error) {
+        router.replace('/userConsole');
+    } else {
+        toast.error(result.error);
+    }
+
+}

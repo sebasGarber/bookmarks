@@ -17,7 +17,7 @@ export default function Home() {
     getSession().then(session => {
 
       if (session) {
-        router.replace('/');
+        router.replace('/userConsole');
       } else {
         setIsLoading(false);
       }
@@ -29,7 +29,6 @@ export default function Home() {
   if (isLoading) {
     return <Loading open={true}/>
   }
-
 
   return (
     <div className='loginPageIndex'>
