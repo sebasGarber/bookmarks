@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/client'; //npm install --save-exact next-auth@3
 import { useEffect, useState } from 'react';
 
+import Loading from '../components/utils/Loading';
+
 export default function Home() {
 
   const router = useRouter();
@@ -26,7 +28,7 @@ export default function Home() {
   }, [router])
   
   if (isLoading) {
-    return <p>Loading...</p>
+    return <Loading open={true}/>
   }
 
 
