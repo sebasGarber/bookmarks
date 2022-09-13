@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Form, FloatingLabel, Button, Spinner } from "react-bootstrap"; //npm install react-bootstrap@next bootstrap@5.1.0
+import { Button, Spinner } from "react-bootstrap"; //npm install react-bootstrap@next bootstrap@5.1.0
 import { map } from "lodash" //https://lodash.com/docs/4.17.15#map
 import validator from "validator"; //npm install validator
 import { toast } from 'react-toastify' //npm i react-toastify
 //import getDataFromApi from './../../Components/api/getDataFromApi'
+
+import TextField from '@mui/material/TextField';
+import FormControl from '@material-ui/core/FormControl';
 
 export default function FormLogin() {
 
@@ -52,9 +55,15 @@ export default function FormLogin() {
 
         }
 
-        else if(validator.isEmpty(formData.password) ) {
+        else if(validator.isEmpty(formData.password)) {
 
             toast.warning('נא להזין סיסמה');
+
+        }
+
+        else if(formData.password.length < 8 ) {
+
+            toast.warning('נא להזין סיסמה מעל 8 תווים');
 
         }
         
@@ -69,47 +78,34 @@ export default function FormLogin() {
     }
 
   return (
-    <div className='formCont'>
+    <div className='formLogin'>
+
+        <FormControl  className='form-100' >
+            <TextField 
+                name={formFields[0].name}
+                onChange={onChange}
+                //multiline
+                value={formData.assignText}
+                label={formFields[0].placeholder}
+                error={ !formData[formFields[0].name] && showErrors }
+                helperText={ !formData[formFields[0].name] && showErrors && formFields[0].error }
+                
+            />
+        </FormControl>
+
+        <FormControl  className='form-100' >
+            <TextField 
+                name={formFields[1].name}
+                onChange={onChange}
+                //multiline
+                value={formData.assignText}
+                label={formFields[1].placeholder}
+                error={ !formData[formFields[1].name] && showErrors }
+                helperText={ !formData[formFields[1].name] && showErrors && formFields[1].error }
+                
+            />
+        </FormControl>
         
-        <FloatingLabel label={formFields[0].placeholder} >
-
-            <Form.Control
-
-            className="customFloatInput"
-            isInvalid={!formData[formFields[0].name] && showErrors}
-            /*isValid={formik.touched.fullname && !formik.errors.fullname}  */
-            type={formFields[0].type}
-            name={formFields[0].name}
-            disabled={false}
-            placeholder={formFields[0].placeholder}
-            onChange={onChange}
-            value={formData[formFields[0].name]}
-            />
-            { formFields[0].error && <Form.Control.Feedback type="invalid">
-                <span>{ formFields[0].error }</span>
-            </Form.Control.Feedback> }
-            
-        </FloatingLabel>
-
-        <FloatingLabel label={formFields[1].placeholder} >
-
-            <Form.Control
-
-            className="customFloatInput"
-            isInvalid={!formData[formFields[1].name] && showErrors}
-            /*isValid={formik.touched.fullname && !formik.errors.fullname}  */
-            type={formFields[1].type}
-            name={formFields[1].name}
-            disabled={false}
-            placeholder={formFields[1].placeholder}
-            onChange={onChange}
-            value={formData[formFields[1].name]}
-            />
-            { formFields[1].error && <Form.Control.Feedback type="invalid">
-                <span>{ formFields[1].error }</span>
-            </Form.Control.Feedback> }
-            
-        </FloatingLabel>
 
         <div className="d-grid gap-2 btnCont">
 
@@ -118,6 +114,7 @@ export default function FormLogin() {
             </Button>
 
         </div>
+        
     </div>
   )
 }

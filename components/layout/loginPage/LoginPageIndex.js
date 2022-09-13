@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import FormLogin from './FormLogin';
+import RtlMaterialCont from '../../utils/RtlMaterialCont';
 
 function Copyright(props) {
   return (
@@ -72,17 +73,13 @@ export default function loginPageIndex() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               
-            <FormLogin />
+            
+            <RtlMaterialCont content={ <FormLogin /> } /> 
 
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>

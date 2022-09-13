@@ -24,3 +24,20 @@ body {
 .regularTypeFamily {
   font-family: $fontRegular;
 }
+
+.form-100 {
+  width: 100%;
+}
+
+.formLogin {
+
+  .form-100 {
+    min-height: 70px;
+    
+  }
+
+  .btn {
+    margin: 5px 0 0 0;
+  }
+
+}

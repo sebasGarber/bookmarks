@@ -11,18 +11,26 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.1.0",
+    "jss-rtl": "^0.3.0",
     "lodash": "^4.17.21",
+    "mongodb": "^4.9.1",
     "next": "12.3.0",
+    "next-auth": "3.29.10",
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0-beta.1",
+    "react-device-detect": "^2.2.2",
     "react-dom": "18.2.0",
     "react-toastify": "^9.0.8",
     "sass": "^1.54.9",
+    "stylis": "^4.1.2",
     "stylis-plugin-rtl": "^2.1.1",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "eslint": "8.23.1",
