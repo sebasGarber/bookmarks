@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import Loginpageindex from '../components/layout/loginPage/Loginpageindex'
+
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/client'; //npm install --save-exact next-auth@3
 import { useEffect, useState } from 'react';
 
 import Loading from '../components/utils/Loading';
+import LoginIndex from '../components/layout/loginPage/LoginIndex';
 
 export default function Home() {
 
@@ -39,7 +40,7 @@ export default function Home() {
       </Head>
 
       <main> {/* className={styles.main} */}
-        <Loginpageindex />
+        <LoginIndex />
       </main>
 
       

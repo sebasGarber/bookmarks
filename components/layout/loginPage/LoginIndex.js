@@ -27,7 +27,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 
-export default function Loginpageindex() {
+export default function LoginIndex() {
 
   const [newUserPage, setNewUserPage] = useState(false);
   const [newUserData, setNewUserData] = useState(false);
