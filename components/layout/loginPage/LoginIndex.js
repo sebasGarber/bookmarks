@@ -77,7 +77,6 @@ export default function LoginIndex() {
               {newUserPage ? <span>יצירת משתמש</span> : <span>התחברות</span>}
             </Typography>
             <Box component="form"  noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              
             
             {newUserPage ? <RtlMaterialCont content={ <FormNewUser setNewUserPage = {setNewUserPage} newUserData = {newUserData} setNewUserData={setNewUserData} /> } /> : <RtlMaterialCont content={ <FormLogin newUserData = {newUserData} /> } /> }
 
