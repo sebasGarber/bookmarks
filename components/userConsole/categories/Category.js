@@ -24,7 +24,7 @@ export default function Category(props) {
         setShowAddBookmark(!showAddBookmark);
     }
 
-    console.log('bookmarks', bookmarks)
+    //console.log('bookmarks', bookmarks)
 
   return (
     <Fragment>

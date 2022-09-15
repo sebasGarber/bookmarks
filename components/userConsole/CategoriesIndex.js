@@ -7,7 +7,7 @@ import { getAllBookmarks } from './userConsoleFunctions';
 export default function CategoriesIndex(props) {
 
   const { categories } = props
-  console.log('categories', categories);
+  //console.log('categories', categories);
 
   const [ bookmarks, setBookmarks ] = useState([]);
   const [loading, setLoading] = useState(false);

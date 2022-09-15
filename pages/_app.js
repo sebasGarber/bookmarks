@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify' //npm i react-toastify
 import { useRouter } from 'next/router';
 import { isMobile } from "react-device-detect"; //npm install react-device-detect //https://www.npmjs.com/package/react-device-detect
 import Layout from "../components/layout/layout";
-import {  getSession } from 'next-auth/client';
 
 function MyApp({ Component, pageProps }) {
 
@@ -42,23 +41,11 @@ function MyApp({ Component, pageProps }) {
 
   }
 
-  const [userData, setUserData] = useState(false);
-
-  //get session data info
-  useEffect(() => {
-    
-    getSession().then(session => {
-
-        setUserData(session);
-
-    })
-
-  }, [])
 
   //User Console Layout
   return <Fragment>
 
-      <Layout userData = { userData } >
+      <Layout>
         <Component {...pageProps}  />
       </Layout>
 

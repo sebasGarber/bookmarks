@@ -189,7 +189,7 @@ async function loginUser(formData,setLoading,router) {
 
     });
 
-    console.log('result',  result);
+    //console.log('result',  result);
 
     setLoading(false);
 
