@@ -1,0 +1,39 @@
+@import "./../../styles/_vars.scss";
+
+.mainNavigation {
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: $greyBgMenu;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: $shadowDefault;
+    margin: 0 0 0px 0;
+
+    .right {
+        color: black;
+        max-width: 200px;
+     
+    }
+
+    .left {
+        button {
+            border: none;
+            border-radius: 5px;
+            box-shadow: $shadowDefault;
+            cursor: pointer;
+            font-size: 14px;
+            &:hover {
+                background: black;
+                color: white;
+            }
+        }
+        
+    }
+
+    .center {
+        color: white;
+    }
+
+}

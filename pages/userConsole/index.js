@@ -1,29 +1,18 @@
 import React, { useEffect } from 'react'
-import {  signOut, getSession } from 'next-auth/client'; //npm install --save-exact next-auth@3
-import { useRouter } from 'next/router';
+import {  getSession } from 'next-auth/client'; //npm install --save-exact next-auth@3
+import NewUserPage from '../../components/views/newUserLogin';
 
-export default function index() {
+export default function index(props) {
 
-    const router = useRouter();
-
-    useEffect(() => {
-    
-        getSession().then(session => {
-    
-          if (session) {
-            console.log('session', session);
-          } else {
-            router.replace('/');
-          }
-    
-        })
-    
-      }, [])
-
+  //console.log(props);
+  const { userData  } = props
 
   return (
-    <div>
-        <button onClick={()=> signOut()}>Sing Out</button>
+    
+    <div className='user-console-index'>
+
+      <NewUserPage userData = {userData} />
+
     </div>
   )
 }
@@ -44,7 +33,7 @@ export async function getServerSideProps(context) {
     }
   
     return {
-      props: { session }
+      props: { userData : session }
     }
     
   
