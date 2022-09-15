@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "fb";
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    src: url("../fonts/Heebo-Regular.woff") format("opentype"); /* here you go, IE */
+  }
+  
+  @font-face {
+    font-family: "fb_light";
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    src: url("../fonts/Heebo-Light.woff") format("opentype"); /* here you go, IE */
+  }
+  
+  @font-face {
+    font-family: "fb_medium";
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    src: url("../fonts/Heebo-Medium.woff") format("opentype"); /* here you go, IE */
+  }
+  
+  @font-face {
+    font-family: "fb_bold";
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    src: url("../fonts/Heebo-Bold.woff") format("opentype"); /* here you go, IE */
+  }
+  
+  
+  @font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Roboto"), local("Roboto-Regular"),
+      url(https://fonts.gstatic.com/s/roboto/v15/CrYjSnGjrRCn0pd9VQsnFOvvDin1pK8aKteLpeZ5c0A.woff)
+        format("woff");
+  }
+  
+  $fontRegular: "fb", "helvetica", "arial";
+  $fontMedium: "fb_medium", "helvetica", "arial";
+  $fontBold: "fb_bold", "helvetica", "arial";
+  $fontLight: "fb_light", "helvetica", "arial";

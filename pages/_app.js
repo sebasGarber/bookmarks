@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }) {
   //LoginPageRoute
   if(router.pathname === '/') {
 
+    //Login Layout
     return <Fragment>
     
       <Component {...pageProps} />
@@ -43,7 +44,7 @@ function MyApp({ Component, pageProps }) {
 
   const [userData, setUserData] = useState(false);
 
-  //get data info
+  //get session data info
   useEffect(() => {
     
     getSession().then(session => {
@@ -54,7 +55,7 @@ function MyApp({ Component, pageProps }) {
 
   }, [])
 
-
+  //User Console Layout
   return <Fragment>
 
       <Layout userData = { userData } >

@@ -8,21 +8,17 @@ export default function MainNavigation(props) {
 
     const { userData } = props
 
-    console.log('userData', userData);
-
   return (
-    <div div className={classes.mainNavigation}>
+    <div className={classes.mainNavigation}>
         <div className={classes.right}>
-        <TextTruncate  line={1}
-            element="span"
-            truncateText="…"
-            text={`שלום: ${userData?.user?.name}`}
-            //textTruncateChild={<a href="#">Read on</a>}
-        />
+            <TextTruncate  line={1}
+                element="span"
+                truncateText="…"
+                text={`שלום: ${userData?.user?.name}`}
+                //textTruncateChild={<a href="#">Read on</a>}
+            />
         </div>
-        <div className={classes.center}>
-            Bookmarks Saver
-        </div>
+        <div className={classes.center}>Bookmarks Saver</div>
         <div className={classes.left}>
             <button onClick={()=> signOut()}>התנתק</button>
         </div>

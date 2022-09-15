@@ -1,17 +1,38 @@
-import React, { useEffect } from 'react'
+
+import React, { useEffect, useState } from 'react'
 import {  getSession } from 'next-auth/client'; //npm install --save-exact next-auth@3
-import NewUserPage from '../../components/views/newUserLogin';
+import StartUser from '../../components/userConsole/StartUser'
+import getCategories from '../../components/userConsole/userConsoleFunctions';
+import UserConsoleIndex from '../../components/userConsole/UserConsoleIndex';
+import { isEmpty } from 'lodash';
+import Loading from '../../components/utils/Loading';
 
 export default function index(props) {
 
   //console.log(props);
   const { userData  } = props
 
+  const [ categories, setCategories ] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {getCategories(setLoading,setCategories);}, [])
+  const reloadCategories = () => {
+    console.log('reload');
+    getCategories(setLoading,setCategories);
+  }
+
+  //console.log(' categories',  categories);
+
+  if(loading) {
+    return (<Loading open={loading} noBackdrop={false}/>)
+  }
+
   return (
     
-    <div className='user-console-index'>
+    <div className='userConsoleIndex'>
 
-      <NewUserPage userData = {userData} />
+      {isEmpty(categories) ? <StartUser session = { userData } reloadCategories = { reloadCategories } />
+       : <UserConsoleIndex categories = { categories } />}
 
     </div>
   )
