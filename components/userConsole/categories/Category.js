@@ -153,7 +153,7 @@ function AddBookmark(props) {
 
             formData.catId = item._id;
 
-            console.log('formData', formData)
+            //console.log('formData', formData)
             sendNewBookmark(setLoading,formData,reloadBookmark);
         }
 

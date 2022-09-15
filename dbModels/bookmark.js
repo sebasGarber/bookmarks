@@ -35,7 +35,7 @@ function validateMe(reqBody) {
 
   const schema = {
     title: Joi.string().optional(),
-    notes: Joi.string().optional(),
+    notes: Joi.optional(),
     url: Joi.string().required(),
     uid: Joi.string().required(),
     catId: Joi.string().required()
