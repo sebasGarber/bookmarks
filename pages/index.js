@@ -35,7 +35,13 @@ export default function Home() {
     <div className='loginPageIndex'>
       <Head>
         <title>Bookmarks</title>
+        
         <meta name="description" content="Bookmarks System by Sebas" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="og:image" content="https://bookmarks-sebas.vercel.app/img/maxresdefault.jpg" />
+        <meta name="canonical" content="https://bookmarks-sebas.vercel.app" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

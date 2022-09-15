@@ -1,6 +1,7 @@
 import { map } from 'lodash';
 import React, { Fragment, useEffect, useState } from 'react'
 import Masonry from 'react-masonry-css' //npm i react-masonry-css //css on global css!!!
+import Loading from '../utils/Loading';
 import Category from './categories/Category';
 import { getAllBookmarks } from './userConsoleFunctions';
 
@@ -10,7 +11,7 @@ export default function CategoriesIndex(props) {
   //console.log('categories', categories);
 
   const [ bookmarks, setBookmarks ] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {getAllBookmarks(setLoading,setBookmarks);}, [])
   const reloadBookmark = () => { getAllBookmarks(setLoading,setBookmarks) }
@@ -28,7 +29,7 @@ export default function CategoriesIndex(props) {
     return <Category  key={item._id} item = {item} bookmarks = { bookmarks } reloadBookmark = {reloadBookmark} />
   });
 
-  if(loading) {return (<p>Loading...</p>)}
+  if(loading) {return (<Loading open={true} noBackdrop={true}/>)}
 
   return (
     <Fragment>

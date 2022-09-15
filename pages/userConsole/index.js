@@ -13,25 +13,25 @@ export default function index(props) {
   const { userData  } = props
 
   const [ categories, setCategories ] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {getCategories(setLoading,setCategories);}, [])
   const reloadCategories = () => {
-    console.log('reload');
-    getCategories(setLoading,setCategories);
+    location.reload();
+    //getCategories(setLoading,setCategories);
   }
 
   //console.log(' categories',  categories);
 
   if(loading) {
-    return (<Loading open={loading} noBackdrop={false}/>)
+    return (<Loading open={loading} noBackdrop={true}/>)
   }
 
   return (
     
     <div className='userConsoleIndex'>
 
-      {isEmpty(categories) ? <StartUser session = { userData } reloadCategories = { reloadCategories } />
+      {isEmpty(categories) && !loading ? <StartUser session = { userData } reloadCategories = { reloadCategories } />
        : <UserConsoleIndex categories = { categories } />}
 
     </div>
