@@ -12,7 +12,7 @@ import RtlMaterialCont from '../utils/RtlMaterialCont';
 
 export default function StartUser(props) {
 
-    const {session, reloadCategories } = props
+    const {session, reloadCategoriesInsert } = props
 
     const [sendList, setSendList] = useState ([]);
     const [customCat, setCustomCat] = useState('');
@@ -50,7 +50,7 @@ export default function StartUser(props) {
             }
     
             //console.log('allCategories', allCategories);
-            sendCategories(setLoading,allCategories,reloadCategories);
+            sendCategories(setLoading,allCategories,reloadCategoriesInsert);
 
         }
 

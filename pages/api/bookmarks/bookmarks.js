@@ -69,7 +69,8 @@ async function handler(req, res) {
             return res.status(400).json({error : 'אין ID'});   
         }
 
-        const bookmark = await Bookmark.findByIdAndUpdate(req?.body?.id, { url: reqBody.url }, {
+
+        const bookmark = await Bookmark.findByIdAndUpdate(req?.body?.id, { url: reqBody.url, title : reqBody.title, notes : reqBody.notes }, {
             new: true
           });
         

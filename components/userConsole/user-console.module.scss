@@ -107,6 +107,10 @@
                         color: $blue;
                         border: none;
                         background: none;
+
+                        &:nth-child(1) {
+                            color: red;
+                        }
                     }
                 }
     
@@ -144,6 +148,40 @@
     .formControl {
         width: 100%;
         margin: 0 0 20px 0;
+    }
+
+}
+
+.CategoriesMenu {
+
+    ul {
+
+        display: flex;
+        gap: 100px;
+        justify-content: center;
+        padding: 10px 20px;
+        background: $pink;
+        margin: 0 0 20px 0;
+        width: 100%;
+
+        .newCat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .catForm {
+            
+            label {
+                color: white;
+            }
+        }
+        
+
+        .BtnMenuCat {
+            font-size: 16px;
+            margin: 0 5px 0 5px;
+        }
     }
 
 }

@@ -7,17 +7,16 @@ import { getAllBookmarks } from './userConsoleFunctions';
 
 export default function CategoriesIndex(props) {
 
-  const { categories } = props
+  const { categories,  reloadCategories } = props
   //console.log('categories', categories);
 
   const [ bookmarks, setBookmarks ] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {getAllBookmarks(setLoading,setBookmarks);}, [])
   const reloadBookmark = () => { getAllBookmarks(setLoading,setBookmarks) }
 
-  
-  
+    
   const breakpointColumnsObj = {
     default: 4,
     1100: 3,
@@ -26,7 +25,7 @@ export default function CategoriesIndex(props) {
   };
 
   const items = map(categories,item => {
-    return <Category  key={item._id} item = {item} bookmarks = { bookmarks } reloadBookmark = {reloadBookmark} />
+    return <Category  key={item._id} item = {item} bookmarks = { bookmarks }  reloadCategories = { reloadCategories} reloadBookmark = {reloadBookmark} />
   });
 
   if(loading) {return (<Loading open={true} noBackdrop={true}/>)}

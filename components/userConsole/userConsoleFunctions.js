@@ -1,7 +1,10 @@
+import { size } from "lodash";
 import { toast } from "react-toastify";
 import { sendToLocalApi2 } from "../../lib/sendToLocalApi";
 
 export default async function getCategories(setLoading,setCategories) {
+
+    setLoading(true);
 
     const data = {
       url: 'categories',
@@ -25,7 +28,47 @@ export default async function getCategories(setLoading,setCategories) {
 
   }
 
-  export async function sendCategories(setLoading,allCategories,reloadCategories) {
+  
+  export async function searchCategories(setLoading,setCategories,searchValue) {
+
+    setLoading(true);
+
+    const data = {
+      url: 'search',
+      controller: 'categories',
+      objectToSend : {
+        searchValue : searchValue
+      }
+    }
+
+    const responseData = await sendToLocalApi2(data, setLoading, 'POST');
+
+    if(responseData?.error) {
+      toast.error(responseData?.error);
+      return;
+    }
+
+    else if(responseData?.warning) {
+      toast.warning(responseData?.warning);
+      return;
+    }
+    
+    else if(!responseData?.get) {
+        toast.error('שגיאה');
+        
+      return;
+
+    } else {
+
+      setCategories(responseData.get);
+
+    }
+
+    
+
+  }
+
+  export async function sendCategories(setLoading,allCategories,reloadCategoriesInsert) {
 
     const data = {
       url: 'categories',
@@ -37,7 +80,7 @@ export default async function getCategories(setLoading,setCategories) {
 
     const responseData = await sendToLocalApi2(data, setLoading, 'POST');
 
-    console.log('responseData',  responseData);
+    //console.log('responseData',  responseData);
 
     if(responseData?.error) {
       toast.error(responseData?.error);
@@ -50,13 +93,44 @@ export default async function getCategories(setLoading,setCategories) {
     }
 
     toast.success('כל הכבודת התחלנו!...');
+    reloadCategoriesInsert();
+    
+
+  }
+
+  
+  export async function removeCategoryApi(setLoading,catId,reloadCategories) {
+
+    const data = {
+      url: 'categories',
+      controller: 'categories',
+      id: catId,
+      objectToSend : {}
+    }
+
+    const responseData = await sendToLocalApi2(data, setLoading, 'DELETE');
+
+    //console.log('responseData',  responseData);
+
+    if(responseData?.error) {
+      toast.error(responseData?.error);
+      return;
+    }
+
+    if(!responseData?.delete) {
+        toast.error('שגיאה');
+      return;
+    }
+
+    toast.success('נמחק בהצלחה');
     reloadCategories();
     //setCategories(responseData.get);
 
   }
 
-
 export async function getAllBookmarks(setLoading,setBookmarks) {
+
+  setLoading(true);
 
 const data = {
     url: 'bookmarks',
@@ -111,3 +185,66 @@ export async function sendNewBookmark(setLoading,objectToSend,reloadBookmark) {
     //setCategories(responseData.get);
 
   }
+
+
+export async function editBookmarkApi(setLoading,objectToSend,reloadBookmark) {
+
+  const data = {
+    url: 'bookmarks',
+    controller: 'bookmarks',
+    id: objectToSend.id,
+    objectToSend : {
+      title : objectToSend.title,
+      url : objectToSend.url,
+      notes : objectToSend.notes,
+      catId : objectToSend.catId
+    }
+  }
+
+  const responseData = await sendToLocalApi2(data, setLoading, 'PUT');
+
+  if(responseData?.error) {
+    toast.error(responseData?.error);
+    return;
+  }
+
+  if(!responseData?.update) {
+      toast.error('שגיאה');
+    return;
+  }
+
+  toast.success('עודכן בהצלחה');
+  reloadBookmark();
+  //setCategories(responseData.get);
+
+}
+
+
+export async function deleteMyBookMark(setLoading,bookmarkId,reloadBookmark) {
+
+  const data = {
+    url: 'bookmarks',
+    controller: 'bookmarks',
+    id: bookmarkId,
+    objectToSend : {}
+  }
+
+  const responseData = await sendToLocalApi2(data, setLoading, 'DELETE');
+
+  if(responseData?.error) {
+    toast.error(responseData?.error);
+    return;
+  }
+
+  if(!responseData?.delete) {
+      toast.error('שגיאה');
+    return;
+  }
+
+  toast.success('נמחק בהצלחה');
+  reloadBookmark();
+  //setCategories(responseData.get);
+
+}
+
+  

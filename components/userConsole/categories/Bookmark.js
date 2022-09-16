@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 export default function Bookmark(props) {
 
-    const { bookmark } = props;
+    const { bookmark, editMe, deleteMe } = props;
 
     const openMe = () => { 
 
@@ -24,7 +24,7 @@ export default function Bookmark(props) {
 
 
   return (
-    <Card className={classes.bookmark} onClick={ openMe }>
+    <Card className={classes.bookmark} >
       <CardActionArea>
         {/* <CardMedia
           component="img"
@@ -33,7 +33,7 @@ export default function Bookmark(props) {
           image="/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         /> */}
-        <CardContent>
+        <CardContent onClick={ openMe }>
           <Typography gutterBottom variant="h5" component="h3">
             {bookmark?.title}
           </Typography>
@@ -42,9 +42,15 @@ export default function Bookmark(props) {
           </Typography> }
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
+      <CardActions >
+        <Button size="small" color="primary" onClick={ openMe } >
           פתיחה
+        </Button>
+        <Button size="small" color="primary" onClick={ () => editMe(bookmark) } >
+          עריכה
+        </Button>
+        <Button size="small" color="primary" onClick={ () => deleteMe(bookmark) } >
+          מחיקה
         </Button>
       </CardActions>
     </Card>
