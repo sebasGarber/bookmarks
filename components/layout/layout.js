@@ -3,6 +3,7 @@ import MainNavigation from './main-navigation';
 import {  getSession } from 'next-auth/client';
 import Loading from '../utils/Loading';
 import Head from 'next/head'
+import { isMobile } from "react-device-detect"; //npm install react-device-detect //https://www.npmjs.com/package/react-device-detect
 
 function Layout(props) {
 
@@ -44,7 +45,7 @@ function Layout(props) {
 
         <MainNavigation  userData = { userData } />
         
-        <main>{props.children}</main>
+        <main className={ isMobile ? 'mobile' : 'desktop' } >{props.children}</main>
         
       </Fragment>
     );

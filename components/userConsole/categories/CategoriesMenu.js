@@ -8,6 +8,7 @@ import { Button, Spinner } from "react-bootstrap"; //npm install react-bootstrap
 import classes from './../user-console.module.scss'
 import { sendCategories } from '../userConsoleFunctions';
 import { toast } from 'react-toastify';
+import { isMobile } from "react-device-detect"; //npm install react-device-detect //https://www.npmjs.com/package/react-device-detect
 
 export default function CategoriesMenu(props) {
 
@@ -15,7 +16,7 @@ export default function CategoriesMenu(props) {
 
   return (
     <div className={classes.CategoriesMenu}>
-        <ul>
+        <ul className='formMenuCat'>
             <li>
                 <RtlMaterialCont content={ <SearchCat searchCat = { searchCat } searchCatValue = {searchCatValue} /> } />
             </li>
@@ -58,8 +59,8 @@ function NewCat(props) {
 
      }
 
-    return (<div className={classes.newCat}>
-       <FormControl  className={classes.catForm} >
+    return (<div className={`${classes.newCat}`}>
+       <FormControl  className={`${classes.catForm}`} >
             <TextField 
                 variant="filled"
                 onChange={ (event)=> setNewCat(event.target.value) }
@@ -70,7 +71,7 @@ function NewCat(props) {
             />
         </FormControl>
         <Button className={classes.BtnMenuCat} disabled={loading} variant={'light'} size="lg" onClick={ sendCategoriesToApi }>
-            {loading ? <Spinner size="" animation="border" variant="light" /> : <span>הוסף &raquo;</span> }
+            {loading ? <Spinner size="" animation="border" variant="light" /> : <span>הוספה &raquo;</span> }
         </Button>
     </div>)
 

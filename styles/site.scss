@@ -286,3 +286,38 @@ ul {
   }
 
 }
+
+.mobile {
+  .formMenuCat {
+    
+    gap: 10px;
+    display: block;
+
+    li {
+
+      margin: 0 0 20px 0;
+
+      > div {
+
+        > div {
+          width: 100%;
+        }
+
+      }
+
+      &:last-child {
+        margin-bottom: 5px;
+      }
+
+      button {
+        padding: 18px 8px;
+        line-height: 1;
+        min-width: 80px;
+      }
+
+    }
+
+    
+
+  }
+}
