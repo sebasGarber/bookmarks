@@ -32,15 +32,6 @@ export default function LoginIndex() {
   const [newUserPage, setNewUserPage] = useState(false);
   const [newUserData, setNewUserData] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
   return (
     <ThemeProvider theme={theme} >
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -76,7 +67,7 @@ export default function LoginIndex() {
             <Typography component="h1" variant="h5">
               {newUserPage ? <span>יצירת משתמש</span> : <span>התחברות</span>}
             </Typography>
-            <Box component="form"  noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" sx={{ mt: 1 }}>
             
             {newUserPage ? <RtlMaterialCont content={ <FormNewUser setNewUserPage = {setNewUserPage} newUserData = {newUserData} setNewUserData={setNewUserData} /> } /> : <RtlMaterialCont content={ <FormLogin newUserData = {newUserData} /> } /> }
 

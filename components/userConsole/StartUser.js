@@ -62,7 +62,7 @@ export default function StartUser(props) {
         <h1 className='animate__animated animate__bounce'>
             <strong>שלום {session.user.name}!</strong>באו נתחיל!</h1>
         <p>בחרו קטגוריות:</p>
-        <ul>
+        <ul className='newUserCat'>
             {map(startCategories,item => {
             
                 if (true) {
