@@ -138,6 +138,7 @@ export default function FormLogin(props) {
             <TextField 
                 name={formFields[1].name}
                 onChange={onChange}
+                type='password'
                 //multiline
                 value={formData[formFields[1].name]}
                 label={formFields[1].placeholder}

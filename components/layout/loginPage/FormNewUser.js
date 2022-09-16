@@ -154,6 +154,7 @@ export default function FormNewUser(props) {
             <TextField 
                 name={formFields[1].name}
                 onChange={onChange}
+                type='password'
                 //multiline
                 value={formData.assignText}
                 label={formFields[1].placeholder}
